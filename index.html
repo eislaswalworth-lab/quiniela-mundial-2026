@@ -280,7 +280,7 @@ document.getElementById('qStand').oninput=buildStandings;
 buildStandings();buildMatrix();buildCards();buildChamps();
 // ===== General acumulado =====
 const GEN=DATA.general||[];
-(function(){const el=document.getElementById('genInfo');if(el)el.textContent=`${GEN.length} participantes · Grupos ${META.played||72}/72 · 16vos ${(EL.fixture||[]).filter(m=>ELR[m.n]!=null).length}/16`;})();
+(function(){const el=document.getElementById('genInfo');const _e=DATA.elim||{fixture:[],resultados:{}};const _pj=(_e.fixture||[]).filter(m=>(_e.resultados||{})[m.n]!=null).length;if(el)el.textContent=`${GEN.length} participantes · Grupos ${(META&&META.played)||72}/72 · 16vos ${_pj}/16 jugados`;})();
 function buildGenPodium(){
   const top=GEN.slice(0,3);const order=[top[1],top[0],top[2]];const med=['🥈','🥇','🥉'];
   document.getElementById('genPodium').innerHTML=order.map((s,j)=>s?`<div class="pod ${j===1?'g1':''}"><div class="medal">${med[j]}</div><div class="pn">${s.name}</div><div class="pts">${s.tot}</div><div class="det">${s.gp} grupos · ${s.ep} 16vos</div></div>`:'').join('');
